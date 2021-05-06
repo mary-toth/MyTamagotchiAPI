@@ -16,6 +16,7 @@ namespace MyTamagotchiAPI.Models
         // Add database tables here
         public DbSet<Pet> Pets { get; set; }
         public DbSet<Feeding> Feedings { get; set; }
+        public DbSet<Playtime> Playtimes { get; set; }
 
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
