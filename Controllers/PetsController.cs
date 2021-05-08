@@ -166,22 +166,13 @@ namespace MyTamagotchiAPI.Controllers
             return _context.Pets.Any(pet => pet.Id == id);
         }
 
-        // Post /pets/{id}/playtimes
-
         [HttpPost("{id}/playtimes")]
         public async Task<ActionResult<Pet>> PlayTimeForPet(int id)
         {
-
-            //should find the pet by id 
-            // var pet = _context.Pets.FirstOrDefault(pet => pet.Id == id);
             var pet = await _context.Pets.FindAsync(id);
-
-            //It should also create a new Playtime for this pet and the current time.
             var petPlayTime = new Playtime();
             petPlayTime.PetId = id;
             petPlayTime.When = DateTime.Now;
-
-            // add five to its happiness level and add three to its hunger level. 
             pet.HappinessLevel += 5;
             pet.HungerLevel += 3;
 
@@ -192,20 +183,16 @@ namespace MyTamagotchiAPI.Controllers
 
         }
 
-        // Post /pets/{id}/feedings
         [HttpPost("{id}/feedings")]
         public async Task<ActionResult<Pet>> FeedingForPet(int id)
         {
-            //should find the pet by id 
             var pet = await _context.Pets.FindAsync(id);
 
-            //It should also create a new Feeding for this pet and the current time.
 
             var petFeeding = new Feeding();
             petFeeding.PetId = id;
             petFeeding.When = DateTime.Now;
 
-            // add three to its happiness level and subtract five from its hunger level.
 
             pet.HappinessLevel += 3;
             pet.HungerLevel -= 5;
@@ -218,19 +205,15 @@ namespace MyTamagotchiAPI.Controllers
 
         }
 
-        // Post /pets/{id}/scoldings
         [HttpPost("{id}/scoldings")]
         public async Task<ActionResult<Pet>> ScoldingForPet(int id)
         {
-            //should find the pet by id 
             var pet = await _context.Pets.FindAsync(id);
 
-            //It should also create a new Scolding for this pet and the current time.
             var petScolding = new Scolding();
             petScolding.PetId = id;
             petScolding.When = DateTime.Now;
 
-            //subtract 5 from its happiness level
             pet.HappinessLevel -= 3;
 
             _context.Scoldings.Add(petScolding);
